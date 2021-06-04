@@ -28,6 +28,8 @@ namespace app
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddDbContext<DataContext>(options =>
             {
@@ -54,6 +56,13 @@ namespace app
                         return Task.CompletedTask;
                     };
                 });
+
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("admin"));
+                opt.AddPolicy("RequireAdminRoleOrModerator", policy => policy.RequireRole("admin", "moderator"));
+                opt.AddPolicy("RequireModerateRole", policy => policy.RequireRole("moderator"));
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

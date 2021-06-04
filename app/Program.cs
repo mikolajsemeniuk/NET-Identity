@@ -32,7 +32,7 @@ namespace app
                 var moderator = new User
                 {
                     UserName = "moderator",
-                    Email = "admin@mock.com"
+                    Email = "moderator@mock.com"
                 };
 
                 await userManager.CreateAsync(admin, "P@ssw0rd");

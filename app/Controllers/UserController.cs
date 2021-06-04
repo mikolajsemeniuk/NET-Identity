@@ -19,13 +19,6 @@ namespace app.Controllers
             _repository = repository;
         }
 
-        [Authorize]
-        [HttpGet]
-        public ActionResult<string> AuthMe()
-        {
-            return Ok("you were authenticated");
-        }
-
         [HttpPost("signin/{email}/{password}")]
         public async Task<ActionResult> SignInUserAsync(string email, string password)
         {
@@ -49,5 +42,13 @@ namespace app.Controllers
 
             return Ok("You were successfully signed in");
         }
+
+        [HttpPost("signout")]
+        public async Task<ActionResult> SignOutAsync()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Ok();
+        }
+            
     }
 }
