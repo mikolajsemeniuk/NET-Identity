@@ -6,7 +6,6 @@ using app.Data;
 using app.DTO;
 using app.Interfaces;
 using app.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace app.Services
@@ -20,7 +19,6 @@ namespace app.Services
             _context = context;
         }
 
-        [Authorize]
         public async Task<IEnumerable<ProjectPayload>> GetAllProjectsAsync()
         {
             return await _context.Projects
@@ -39,7 +37,6 @@ namespace app.Services
                 .ToListAsync();
         }
 
-        [Authorize]
         public async Task<ProjectPayload> AddProjectAsync(string location)
         {
             var project = new Project
@@ -56,7 +53,6 @@ namespace app.Services
             };
         }
 
-        [Authorize]
         public async Task RemoveProjectAsync(int id)
         {
             var project = await _context.Projects.FindAsync(id);

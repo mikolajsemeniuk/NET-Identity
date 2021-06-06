@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using app.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,8 @@ namespace app
     {
         public static async Task Main(string[] args)
         {
+            // dotnet run -p app message
+            Console.WriteLine(string.Join('-', args));
             var host = CreateHostBuilder(args).Build();
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
