@@ -18,7 +18,7 @@ namespace app.Services
         private readonly SignInManager<User> _signInManager;
         private readonly AuthenticationProperties _authProperties = new AuthenticationProperties
         {
-            // ...
+            ExpiresUtc = DateTime.UtcNow.AddMinutes(20)
         };
 
         public UserRepository(UserManager<User> userManager, SignInManager<User> signInManager)
